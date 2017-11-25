@@ -40,7 +40,7 @@ public class MouseInput implements MouseListener{
 		
 		if (mx >= GamePanel.WIDTH / 3 +50 && mx <= GamePanel.WIDTH / 3 + 250) {
 			if (my >= 250 && my <= 300) {
-
+				GamePanel.state = GamePanel.stateHelp;
 			}
 		}
 		

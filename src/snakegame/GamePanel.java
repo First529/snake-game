@@ -8,25 +8,29 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 500;
+	public static final int WIDTH = 700;
+	public static final int HEIGHT = 700;
 	// Render
 	private Graphics2D g2d;
 	private BufferedImage image;
 	private GameMenu menu;
+	private HelpMenu helpMenu;
 	// Game loop
 	private Thread thread;
 	private boolean running;
 	private long targetTime;
 	// Game stuff
-	private int SIZE = 10;
-	private Entity head, apple;
+	private int SIZE = 20;
+	private Entity head, apple, bonus;
 	private ArrayList<Entity> snake;
 	private int score;
 	private int level;
@@ -46,11 +50,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	}
 
 	private enum STATE {
-		MENU, GAME;
+		MENU, GAME, HELP;
 	}
 
 	public static STATE state = STATE.MENU;
 	public static STATE stateGame = STATE.GAME;
+	public static STATE stateHelp = STATE.HELP;
 
 	public void addNotify() {
 		super.addNotify();
@@ -64,13 +69,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	public void keyPressed(KeyEvent e) {
 		int k = e.getKeyCode();
-		if (k == KeyEvent.VK_UP || k == KeyEvent.VK_W)
+		if (k == KeyEvent.VK_UP )
 			up = true;
-		if (k == KeyEvent.VK_DOWN || k == KeyEvent.VK_S)
+		if (k == KeyEvent.VK_DOWN )
 			down = true;
-		if (k == KeyEvent.VK_LEFT || k == KeyEvent.VK_A)
+		if (k == KeyEvent.VK_LEFT )
 			left = true;
-		if (k == KeyEvent.VK_RIGHT || k == KeyEvent.VK_D)
+		if (k == KeyEvent.VK_RIGHT )
 			right = true;
 		if (k == KeyEvent.VK_ENTER)
 			start = true;
@@ -79,13 +84,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	public void keyReleased(KeyEvent e) {
 		int k = e.getKeyCode();
-		if (k == KeyEvent.VK_UP || k == KeyEvent.VK_W)
+		if (k == KeyEvent.VK_UP )
 			up = false;
-		if (k == KeyEvent.VK_DOWN || k == KeyEvent.VK_S)
+		if (k == KeyEvent.VK_DOWN )
 			down = false;
-		if (k == KeyEvent.VK_LEFT || k == KeyEvent.VK_A)
+		if (k == KeyEvent.VK_LEFT )
 			left = false;
-		if (k == KeyEvent.VK_RIGHT || k == KeyEvent.VK_D)
+		if (k == KeyEvent.VK_RIGHT )
 			right = false;
 		if (k == KeyEvent.VK_ENTER)
 			start = false;
@@ -93,8 +98,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	}
 
 	public void run() {
-//		if (running)
-//			return;
 		init();
 		long startTime;
 		long elapsed;
@@ -121,6 +124,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private void init() {
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
 		menu = new GameMenu();
+		helpMenu = new HelpMenu();
 		g2d = image.createGraphics();
 		running = true;
 		setUplevel();
@@ -249,8 +253,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		} else if (state == STATE.MENU) {
 			setBackground(Color.black);
 			menu.render(g2d);
+		} else if (state == STATE.HELP) {
+			g2d.clearRect(0, 0, WIDTH, HEIGHT);
+			setBackground(Color.black);
+			helpMenu.render(g2d);
 			
 		}
+			
 	}
 
 	@Override
