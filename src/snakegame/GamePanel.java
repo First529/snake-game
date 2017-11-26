@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 
-	public static final int WIDTH = 700;
-	public static final int HEIGHT = 700;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 800;
 	// Render
 	private Graphics2D g2d;
 	private BufferedImage image;
@@ -71,13 +71,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		int k = e.getKeyCode();
 		if (k == KeyEvent.VK_UP )
 			up = true;
-		if (k == KeyEvent.VK_DOWN )
+		else if (k == KeyEvent.VK_DOWN )
 			down = true;
-		if (k == KeyEvent.VK_LEFT )
+		else if (k == KeyEvent.VK_LEFT )
 			left = true;
-		if (k == KeyEvent.VK_RIGHT )
+		else if (k == KeyEvent.VK_RIGHT )
 			right = true;
-		if (k == KeyEvent.VK_ENTER)
+		else if (k == KeyEvent.VK_ENTER)
 			start = true;
 
 	}
@@ -86,13 +86,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		int k = e.getKeyCode();
 		if (k == KeyEvent.VK_UP )
 			up = false;
-		if (k == KeyEvent.VK_DOWN )
+		else if (k == KeyEvent.VK_DOWN )
 			down = false;
-		if (k == KeyEvent.VK_LEFT )
+		else if (k == KeyEvent.VK_LEFT )
 			left = false;
-		if (k == KeyEvent.VK_RIGHT )
+		else if (k == KeyEvent.VK_RIGHT )
 			right = false;
-		if (k == KeyEvent.VK_ENTER)
+		else if (k == KeyEvent.VK_ENTER)
 			start = false;
 
 	}
@@ -134,6 +134,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	}
 
 	private void setUplevel() {
+		dx = 0;
+		dy = 0;
 		snake = new ArrayList<Entity>();
 		head = new Entity(SIZE);
 		head.setPos(WIDTH / 2, HEIGHT / 2);
