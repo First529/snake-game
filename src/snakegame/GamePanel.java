@@ -128,9 +128,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g2d = image.createGraphics();
 		running = true;
 		setUplevel();
-		gameover = false;
-		level = 1;
-		setFPS(level * 10);
+		
 	}
 
 	private void setUplevel() {
@@ -147,6 +145,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		setApple();
 		score = 0;
 		gameover = false;
+		dx = dy;
+		dy = 0;
 		level = 1;
 		setFPS(level * 10);
 
