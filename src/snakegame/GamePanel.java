@@ -234,9 +234,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		}
 
 		if (head.getX() < 0)
-			head.setX(WIDTH-10);
+			head.setX(WIDTH-20);
 		if (head.getY() < 0)
-			head.setY(HEIGHT-10);
+			head.setY(HEIGHT-20);
 
 		if (head.getX() > WIDTH)
 			head.setX(0);
