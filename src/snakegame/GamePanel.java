@@ -69,28 +69,37 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	public void keyPressed(KeyEvent e) {
 		int k = e.getKeyCode();
-		if (k == KeyEvent.VK_UP )
+		if (k == KeyEvent.VK_UP) {
 			up = true;
-		else if (k == KeyEvent.VK_DOWN )
+			right = false;
+			left = false;
+		} else if (k == KeyEvent.VK_DOWN) {
 			down = true;
-		else if (k == KeyEvent.VK_LEFT )
+			right = false;
+			left = false;
+		} else if (k == KeyEvent.VK_LEFT) {
 			left = true;
-		else if (k == KeyEvent.VK_RIGHT )
+			up = false;
+			down = false;
+		} else if (k == KeyEvent.VK_RIGHT) {
 			right = true;
-		else if (k == KeyEvent.VK_ENTER)
+			up = false;
+			down = false;
+		} else if (k == KeyEvent.VK_ENTER) {
 			start = true;
+		}
 
 	}
 
 	public void keyReleased(KeyEvent e) {
 		int k = e.getKeyCode();
-		if (k == KeyEvent.VK_UP )
+		if (k == KeyEvent.VK_UP)
 			up = false;
-		else if (k == KeyEvent.VK_DOWN )
+		else if (k == KeyEvent.VK_DOWN)
 			down = false;
-		else if (k == KeyEvent.VK_LEFT )
+		else if (k == KeyEvent.VK_LEFT)
 			left = false;
-		else if (k == KeyEvent.VK_RIGHT )
+		else if (k == KeyEvent.VK_RIGHT)
 			right = false;
 		else if (k == KeyEvent.VK_ENTER)
 			start = false;
@@ -128,7 +137,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g2d = image.createGraphics();
 		running = true;
 		setUplevel();
-		
+
 	}
 
 	private void setUplevel() {
@@ -251,7 +260,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			Font font = new Font("arial", Font.ITALIC, 20);
 			g2d.setFont(font);
 			g2d.drawString("SCORE : " + score + " Level : " + level, 30, 30);
-			
+
 		} else if (state == STATE.MENU) {
 			setBackground(Color.black);
 			menu.render(g2d);
@@ -259,9 +268,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			g2d.clearRect(0, 0, WIDTH, HEIGHT);
 			setBackground(Color.black);
 			helpMenu.render(g2d);
-			
+
 		}
-			
+
 	}
 
 	@Override
