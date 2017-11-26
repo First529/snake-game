@@ -27,6 +27,7 @@ public class MouseInput implements MouseListener{
 	public void mousePressed(MouseEvent e) {
 		int my = e.getY();
 		int mx = e.getX();
+		if (GamePanel.state != GamePanel.stateGame) {
 		
 		//public Rectangle playButton = new Rectangle(GamePanel.WIDTH /3 + 50, 150, 100, 50);
 		//public Rectangle helpButton = new Rectangle(GamePanel.WIDTH /3 + 50, 250, 100, 50);
@@ -48,6 +49,7 @@ public class MouseInput implements MouseListener{
 			if (my >= 350 && my <= 400) {
 				System.exit(1);
 			}
+		}
 		}
 		
 	}

@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private long targetTime;
 	// Game stuff
 	private int SIZE = 20;
-	private Entity head, apple, bonus;
+	private Entity head, apple;
 	private ArrayList<Entity> snake;
 	private int score;
 	private int level;
