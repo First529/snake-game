@@ -29,24 +29,24 @@ public class MouseInput implements MouseListener{
 		int mx = e.getX();
 		if (GamePanel.state != GamePanel.stateGame) {
 		
-		//public Rectangle playButton = new Rectangle(GamePanel.WIDTH /3 + 50, 150, 100, 50);
-		//public Rectangle helpButton = new Rectangle(GamePanel.WIDTH /3 + 50, 250, 100, 50);
-		//public Rectangle quitButton = new Rectangle(GamePanel.WIDTH /3 + 50, 350, 100, 50);
+			// public Rectangle playButton = new Rectangle(350, 325, 100, 50);
+			// public Rectangle helpButton = new Rectangle(350, 425, 100, 50);
+			// public Rectangle quitButton = new Rectangle(350, 525, 100, 50);
 		
-		if (mx >= GamePanel.WIDTH / 3 +50 && mx <= GamePanel.WIDTH / 3 + 150) {
-			if (my >= 150 && my <= 200) {
+		if (mx >= 350 && mx <= 450) {
+			if (my >= 325 && my <= 375) {
 				GamePanel.state = GamePanel.stateGame;
 			}
 		}
 		
-		if (mx >= GamePanel.WIDTH / 3 +50 && mx <= GamePanel.WIDTH / 3 + 250) {
-			if (my >= 250 && my <= 300) {
+		if (mx >= 350 / 3 +50 && mx <= 450) {
+			if (my >= 425 && my <= 475) {
 				GamePanel.state = GamePanel.stateHelp;
 			}
 		}
 		
-		if (mx >= GamePanel.WIDTH / 3 +50 && mx <= GamePanel.WIDTH / 3 + 150) {
-			if (my >= 350 && my <= 400) {
+		if (mx >= 350 && mx <= 450) {
+			if (my >= 525 && my <= 575) {
 				System.exit(1);
 			}
 		}

@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 public class Entity {
 
 	private int x, y, size;
-	
+
 	public Entity(int size) {
 		this.size = size;
 	}
@@ -31,23 +31,24 @@ public class Entity {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	public void move(int dx, int dy) {
 		x += dx;
 		y += dy;
 	}
-	
+
 	public Rectangle getBound() {
 		return new Rectangle(x, y, size, size);
 	}
-	
+
 	public boolean isCollsion(Entity o) {
-		if(o == this) return false;
+		if (o == this)
+			return false;
 		return getBound().intersects(o.getBound());
 	}
-	
+
 	public void render(Graphics2D g2d) {
-		g2d.fillRect(x + 1, y + 1, size - 2, size -2);
+		g2d.fillRect(x + 1, y + 1, size - 2, size - 2);
 	}
 
 }
