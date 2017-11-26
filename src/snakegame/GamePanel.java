@@ -73,10 +73,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			up = true;
 			right = false;
 			left = false;
+			
 		} else if (k == KeyEvent.VK_DOWN) {
 			down = true;
 			right = false;
 			left = false;
+			
 		} else if (k == KeyEvent.VK_LEFT) {
 			left = true;
 			up = false;
@@ -232,9 +234,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		}
 
 		if (head.getX() < 0)
-			head.setX(WIDTH);
+			head.setX(WIDTH-10);
 		if (head.getY() < 0)
-			head.setY(HEIGHT);
+			head.setY(HEIGHT-10);
 
 		if (head.getX() > WIDTH)
 			head.setX(0);
