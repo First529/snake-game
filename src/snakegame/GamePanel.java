@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private long targetTime;
 	// Game stuff
 	private int SIZE = 20;
-	private Entity head, apple;
+	private Entity head, apple, bApple;
 	private ArrayList<Entity> snake;
 	private int score;
 	private int level;
@@ -155,7 +155,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			snake.add(e);
 		}
 		apple = new Entity(SIZE);
+		bApple = new Entity(SIZE);
 		setApple();
+		setApple2();
 		score = 0;
 		gameover = false;
 		dx = dy;
@@ -165,9 +167,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	}
 
-	public void setApple() {
-		int x = (int) (Math.random() * (WIDTH - SIZE));
-		int y = (int) (Math.random() * (HEIGHT - SIZE));
+	private void setApple2() {
+		int x = (int) (Math.random() * (WIDTH - SIZE - 20));
+		int y = (int) (Math.random() * (HEIGHT - SIZE - 20));
+		x = x - (x % SIZE);
+		y = y - (y % SIZE);
+		bApple.setPos(x, y);
+		
+	}
+
+	public void setApple() { 
+		int x = (int) (Math.random() * (WIDTH - SIZE - 20));
+		int y = (int) (Math.random() * (HEIGHT - SIZE - 20));
 		x = x - (x % SIZE);
 		y = y - (y % SIZE);
 		apple.setPos(x, y);
@@ -232,11 +243,26 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 				setFPS(level * 10);
 			}
 		}
+		
+		if (bApple.isCollsion(head)) {
+			score += 2;
+			setApple2();
+
+			Entity e = new Entity(SIZE);
+			e.setPos(-200, -200);
+			snake.add(e);
+			if (score % 10 == 0) {
+				level++;
+				if (level > 10)
+					level = 10;
+				setFPS(level * 30);
+			}
+		}
 
 		if (head.getX() < 0)
-			head.setX(WIDTH-10);
+			head.setX(WIDTH-20);
 		if (head.getY() < 0)
-			head.setY(HEIGHT-10);
+			head.setY(HEIGHT-20);
 
 		if (head.getX() > WIDTH)
 			head.setX(0);
@@ -254,6 +280,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			}
 			g2d.setColor(Color.RED);
 			apple.render(g2d);
+			if (level >= 3) {
+				g2d.setColor(Color.BLUE);
+				bApple.render(g2d);
+			}
 			if (gameover) {
 				g2d.drawString("GameOver! Please press enter to start a new game", 150, 200);
 			}
