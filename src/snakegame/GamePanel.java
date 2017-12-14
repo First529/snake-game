@@ -163,6 +163,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		setApple2();
 		setApple3();
 		setApple4();
+
 		score = 0;
 		gameover = false;
 		level = 1;
@@ -186,7 +187,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		y = y - (y % SIZE);
 		apple.setPos(x, y);
 	}
-	
+
 	public void setApple3() {
 		int x = (int) (Math.random() * (WIDTH - SIZE - 20));
 		int y = (int) (Math.random() * (HEIGHT - SIZE - 20));
@@ -194,7 +195,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		y = y - (y % SIZE);
 		blueApple.setPos(x, y);
 	}
-	
+
 	public void setApple4() {
 		int x = (int) (Math.random() * (WIDTH - SIZE - 20));
 		int y = (int) (Math.random() * (HEIGHT - SIZE - 20));
@@ -249,7 +250,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		}
 
 		if (apple.isCollsion(head)) {
-			setFPS(level *10);
+			setFPS(level * 10);
 			score++;
 			setApple();
 
@@ -258,47 +259,52 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			snake.add(e);
 			if (score % 10 == 0 && score != 0) {
 				level++;
-				setFPS(level *10);
+				setFPS(level * 10);
+			}
+		}
+		if (score >= 30) {
+			if (flashApple.isCollsion(head)) {
+				setFPS(level * 30);
+				setApple2();
+
+				Entity e = new Entity(SIZE);
+				e.setPos(-100, -100);
+				if (score % 10 == 0 && score != 0) {
+					level++;
+				}
 			}
 		}
 
-		if (flashApple.isCollsion(head)) {
-			setFPS(level* 30);
-			setApple2();
+		if (score >= 50) {
+			if (blueApple.isCollsion(head)) {
+				setFPS(level * 10);
+				setApple3();
 
-			Entity e = new Entity(SIZE);
-			e.setPos(-100, -100);
-			if (score % 10 == 0 && score != 0) {
-				level++;
+				Entity e = new Entity(SIZE);
+				Entity m = new Entity(SIZE);
+				m.setPos(-100, -100);
+				e.setPos(-100, -100);
+				snake.add(e);
+				snake.add(m);
+				if (score % 10 == 0 && score != 0) {
+					level++;
+					setFPS(level * 10);
+				}
 			}
 		}
-		
-		if (blueApple.isCollsion(head)) {
-			setFPS(level *10);
-			setApple3();
 
-			Entity e = new Entity(SIZE);
-			Entity m = new Entity(SIZE);
-			m.setPos(-100, -100);
-			e.setPos(-100, -100);
-			snake.add(e);
-			snake.add(m);
-			if (score % 10 == 0 && score != 0) {
-				level++;
-				setFPS(level *10);
-			}
-		}
-		
-		if (inviApple.isCollsion(head)) {
-			setFPS(level *5);
-			score += 4;
-			setApple4();
+		if (score >= 70) {
+			if (inviApple.isCollsion(head)) {
+				setFPS(level * 5);
+				score += 4;
+				setApple4();
 
-			Entity e = new Entity(SIZE);
-			e.setPos(-100, -100);
-			if (score % 10 == 0 && score != 0) {
-				level++;
-				setFPS(level *5);
+				Entity e = new Entity(SIZE);
+				e.setPos(-100, -100);
+				if (score % 10 == 0 && score != 0) {
+					level++;
+					setFPS(level * 5);
+				}
 			}
 		}
 
@@ -323,15 +329,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			}
 			g2d.setColor(Color.RED);
 			apple.render(g2d);
-			if (level > 3) {
+			if (score >= 30) {
 				g2d.setColor(Color.YELLOW);
 				flashApple.render(g2d);
 			}
-			if (level > 5) {
+			if (score >= 50) {
 				g2d.setColor(Color.BLUE);
 				blueApple.render(g2d);
 			}
-			if (score > 7) {
+			if (score >= 70) {
 				g2d.setColor(Color.BLACK);
 				inviApple.render(g2d);
 			}
