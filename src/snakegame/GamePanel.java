@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private long targetTime;
 	// Game stuff
 	private int SIZE = 20;
-	private Entity head, apple, flashApple;
+	private Entity head, apple, flashApple, blueApple, inviApple;
 	private ArrayList<Entity> snake;
 	private int score;
 	private int level;
@@ -54,6 +54,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	}
 
 	public static STATE state = STATE.MENU;
+	public static STATE stateMenu = STATE.MENU;
 	public static STATE stateGame = STATE.GAME;
 	public static STATE stateHelp = STATE.HELP;
 
@@ -156,12 +157,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		}
 		apple = new Entity(SIZE);
 		flashApple = new Entity(SIZE);
+		blueApple = new Entity(SIZE);
+		inviApple = new Entity(SIZE);
 		setApple();
 		setApple2();
+		setApple3();
+		setApple4();
 		score = 0;
 		gameover = false;
 		level = 1;
-		setFPS(15);
+		setFPS(10);
 
 	}
 
@@ -180,6 +185,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		x = x - (x % SIZE);
 		y = y - (y % SIZE);
 		apple.setPos(x, y);
+	}
+	
+	public void setApple3() {
+		int x = (int) (Math.random() * (WIDTH - SIZE - 20));
+		int y = (int) (Math.random() * (HEIGHT - SIZE - 20));
+		x = x - (x % SIZE);
+		y = y - (y % SIZE);
+		blueApple.setPos(x, y);
+	}
+	
+	public void setApple4() {
+		int x = (int) (Math.random() * (WIDTH - SIZE - 20));
+		int y = (int) (Math.random() * (HEIGHT - SIZE - 20));
+		x = x - (x % SIZE);
+		y = y - (y % SIZE);
+		inviApple.setPos(x, y);
 	}
 
 	private void requestRender() {
@@ -235,8 +256,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			Entity e = new Entity(SIZE);
 			e.setPos(-100, -100);
 			snake.add(e);
-			if (score % 10 == 0) {
+			if (score % 10 == 0 && score != 0) {
 				level++;
+				setFPS(level *10);
 			}
 		}
 
@@ -246,10 +268,37 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 			Entity e = new Entity(SIZE);
 			e.setPos(-100, -100);
-			snake.add(e);
-			snake.add(e);
 			if (score % 10 == 0 && score != 0) {
 				level++;
+			}
+		}
+		
+		if (blueApple.isCollsion(head)) {
+			setFPS(level *10);
+			setApple3();
+
+			Entity e = new Entity(SIZE);
+			Entity m = new Entity(SIZE);
+			m.setPos(-100, -100);
+			e.setPos(-100, -100);
+			snake.add(e);
+			snake.add(m);
+			if (score % 10 == 0 && score != 0) {
+				level++;
+				setFPS(level *10);
+			}
+		}
+		
+		if (inviApple.isCollsion(head)) {
+			setFPS(level *5);
+			score += 4;
+			setApple4();
+
+			Entity e = new Entity(SIZE);
+			e.setPos(-100, -100);
+			if (score % 10 == 0 && score != 0) {
+				level++;
+				setFPS(level *5);
 			}
 		}
 
@@ -274,9 +323,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			}
 			g2d.setColor(Color.RED);
 			apple.render(g2d);
-			if (level >= 1) {
+			if (level > 3) {
 				g2d.setColor(Color.YELLOW);
 				flashApple.render(g2d);
+			}
+			if (level > 5) {
+				g2d.setColor(Color.BLUE);
+				blueApple.render(g2d);
+			}
+			if (score > 7) {
+				g2d.setColor(Color.BLACK);
+				inviApple.render(g2d);
 			}
 			if (gameover) {
 				g2d.setColor(Color.WHITE);
@@ -289,6 +346,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			g2d.drawString("SCORE : " + score + " Level : " + level, 30, 30);
 
 		} else if (state == STATE.MENU) {
+			g2d.clearRect(0, 0, WIDTH, HEIGHT);
 			setBackground(Color.black);
 			menu.render(g2d);
 		} else if (state == STATE.HELP) {
