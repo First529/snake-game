@@ -27,7 +27,7 @@ public class MouseInput implements MouseListener{
 	public void mousePressed(MouseEvent e) {
 		int my = e.getY();
 		int mx = e.getX();
-		if (GamePanel.state != GamePanel.stateGame) {
+		if (GamePanel.state != GamePanel.stateGame && GamePanel.state != GamePanel.stateHelp) {
 		
 			// public Rectangle playButton = new Rectangle(350, 325, 100, 50);
 			// public Rectangle helpButton = new Rectangle(350, 425, 100, 50);
