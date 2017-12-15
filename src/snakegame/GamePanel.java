@@ -269,9 +269,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 				Entity e = new Entity(SIZE);
 				e.setPos(-100, -100);
-				if (score % 10 == 0 && score != 0) {
-					level++;
-				}
 			}
 		}
 
@@ -286,10 +283,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 				e.setPos(-100, -100);
 				snake.add(e);
 				snake.add(m);
-				if (score % 10 == 0 && score != 0) {
-					level++;
-					setFPS(level * 10);
-				}
 			}
 		}
 
