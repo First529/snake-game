@@ -1,5 +1,7 @@
 package snakegame;
-
+/**
+ * The main class to run the game.
+ */
 import java.awt.Color;
 import java.awt.Dimension;
 

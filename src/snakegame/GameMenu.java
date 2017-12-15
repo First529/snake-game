@@ -1,5 +1,8 @@
 package snakegame;
-
+/**
+ * This class is use to display the game menu.
+ * Including play, help, and quit button.
+ */
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;

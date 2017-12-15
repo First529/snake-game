@@ -1,5 +1,7 @@
 package snakegame;
-
+/**
+ * This class is use to create mouse input to link between all of the state.
+ */
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

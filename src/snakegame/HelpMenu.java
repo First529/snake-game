@@ -1,5 +1,7 @@
 package snakegame;
-
+/**
+ * This class explain what the game is about and new features that we have added to the game.
+ */
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;

@@ -1,5 +1,7 @@
 package snakegame;
-
+/**
+ * This class use to create an object.
+ */
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
